@@ -1,38 +1,45 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-
+using System;
 public class CounterView : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI counterText;
-    [SerializeField] private Counter counter;
+    [SerializeField] private TextMeshProUGUI _counterText;
+    [SerializeField] private Counter _counter;
 
-    private bool isCounterRunning = false;
+    private bool _isCounterRunning = false;
+
+    private void OnEnable()
+    {
+        _counter.CounterChanged += UpdateCounterText;
+    }
+
+    private void OnDisable()
+    {
+        _counter.CounterChanged -= UpdateCounterText;
+    }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (isCounterRunning)
+            if (_isCounterRunning)
             {
-                counter.StopCounter();
-                isCounterRunning = false;
+                _counter.StopCounter();
+                _isCounterRunning = false;
             }
             else
             {
-                counter.StartCounter();
-                isCounterRunning = true;
+                _counter.StartCounter();
+                _isCounterRunning = true;
             }
         }
-
-        UpdateCounterText();
     }
 
-    private void UpdateCounterText()
+    private void UpdateCounterText(int newValue)
     {
-        if (counterText != null)
+        if (_counterText != null)
         {
-            counterText.text = $"Counter: {counter.CounterValue}";
+            _counterText.text = $"Counter: {newValue}";
         }
     }
 }

@@ -1,13 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 public class Counter : MonoBehaviour
 {
     private int _counterValue = 0;
+    private float _delay = 0.5f;
     private bool _isRunning = false;
     private Coroutine _counterCoroutine;
 
-    public int CounterValue => _counterValue;
+    public event Action<int> CounterChanged;
 
     public void StartCounter()
     {
@@ -35,8 +37,9 @@ public class Counter : MonoBehaviour
     {
         while (_isRunning)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(_delay);
             _counterValue++;
+            CounterChanged?.Invoke(_counterValue);
         }
     }
 }

@@ -151,8 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b14226d3e6d725438c835794cfdd857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  counterText: {fileID: 773435534}
-  counter: {fileID: 1599452963}
+  _counterText: {fileID: 773435534}
+  _counter: {fileID: 1599452963}
 --- !u!4 &400674782
 Transform:
   m_ObjectHideFlags: 0
