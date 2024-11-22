@@ -1,21 +1,21 @@
 using TMPro;
 using UnityEngine;
 using System;
-public class CounterView : MonoBehaviour
+public class Counter : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _counterText;
-    [SerializeField] private Counter _counter;
+    [SerializeField] private CounterView _counterView;
 
     private bool _isCounterRunning = false;
 
     private void OnEnable()
     {
-        _counter.CounterChanged += UpdateCounterText;
+        _counterView.CounterChanged += UpdateCounterText;
     }
 
     private void OnDisable()
     {
-        _counter.CounterChanged -= UpdateCounterText;
+        _counterView.CounterChanged -= UpdateCounterText;
     }
 
     private void Update()
@@ -24,12 +24,12 @@ public class CounterView : MonoBehaviour
         {
             if (_isCounterRunning)
             {
-                _counter.StopCounter();
+                _counterView.StopCounter();
                 _isCounterRunning = false;
             }
             else
             {
-                _counter.StartCounter();
+                _counterView.StartCounter();
                 _isCounterRunning = true;
             }
         }
@@ -37,9 +37,6 @@ public class CounterView : MonoBehaviour
 
     private void UpdateCounterText(int newValue)
     {
-        if (_counterText != null)
-        {
-            _counterText.text = $"Counter: {newValue}";
-        }
+        _counterText.text = $"Counter: {newValue}";
     }
 }
